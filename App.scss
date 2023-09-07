@@ -1,0 +1,100 @@
+// https://blog.logrocket.com/sass-react-native-guide/
+
+$background-color: #333;
+$primary-color: #d3d3d3;
+$body-font-size: 18px;
+
+%flex_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backgroundImage {
+    @extend %flex_box;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    @extend %flex_box;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    padding-top: 60px;
+}
+
+.textBody {
+    font-size: $body-font-size;
+    color: $primary-color;
+    text-align: center;
+    box-shadow: 0 0 12px black;
+}
+
+.textLarge {
+    font-size: 34px;
+    color: $primary-color;
+    box-shadow: 0 0 12px black;
+}
+
+.input {
+    font-size: $body-font-size;
+    color: $background-color;
+    padding: 18px 20px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+%button_shared {
+    @extend %flex_box;
+    padding: 14px;
+    background-color: #0c908a;
+    width: 60%;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+.button {
+    @extend %button_shared;
+}
+
+.button2 {
+    @extend %button_shared;
+    background-color: #4e2b68;
+}
+
+.buttonText {
+    font-size: $body-font-size;
+    color: $primary-color;
+}
+
+.list {
+    width: 100%;
+}
+
+.list_item {
+    @extend %flex_box;
+    flex-direction: row;
+    font-size: $body-font-size;
+    padding: 14px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    margin-bottom: 1px;
+}
+
+.list_item_text {
+    font-size: $body-font-size;
+    color: $background-color;
+    flex-grow: 1;
+    max-width: 90%;
+    padding-right: 10px;
+}
+
+.list_item_icon {
+    width: 16px;
+    height: 20px;
+    opacity: 0.3;
+}
