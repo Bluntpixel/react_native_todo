@@ -17,13 +17,13 @@ function Home({ listData, setListData, setCurrentView }) {
     // FORM INPUTS
 
     const handleButtonPress = () => {
-        console.log('You tapped the button!');
+        if (textInput === '') return;
+
         let data = [...listData];
         data.unshift({ content: textInput });
         setListData(data);
         Keyboard.dismiss();
-        textInputRef.current.clear();
-        // setCurrentView('list');
+        setTextInput('');
     };
 
     // ------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ function Home({ listData, setListData, setCurrentView }) {
 
     return (
         <>
-            <Text style={styles.textLarge}>Task Reminders</Text>
+            <Text style={styles.textLarge}>Task Reminder</Text>
             <Text style={styles.textBody}>
                 Please input a new task to be added to the list. Or click on the view button.
             </Text>
