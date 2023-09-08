@@ -1,6 +1,7 @@
 import { StatusBar, ImageBackground, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import Home from './components/Home';
 import TaskList from './components/TaskList';
@@ -55,20 +56,22 @@ export default function App() {
 
     return (
         <>
-            <ImageBackground
-                source={require('./assets/pexels-tobias-bjørkli-1819650.jpg')}
-                style={styles.backgroundImage}
-            >
-                <View style={styles.container}>
-                    {curentView === 'home' && (
-                        <Home listData={listData} setListData={setListData} setCurrentView={setCurrentView} />
-                    )}
-                    {curentView === 'list' && (
-                        <TaskList listData={listData} setListData={setListData} setCurrentView={setCurrentView} />
-                    )}
-                    <StatusBar barStyle="light-content" />
-                </View>
-            </ImageBackground>
+            <SafeAreaProvider>
+                <ImageBackground
+                    source={require('./assets/pexels-tobias-bjørkli-1819650.jpg')}
+                    style={styles.backgroundImage}
+                >
+                    <View style={styles.container}>
+                        {curentView === 'home' && (
+                            <Home listData={listData} setListData={setListData} setCurrentView={setCurrentView} />
+                        )}
+                        {curentView === 'list' && (
+                            <TaskList listData={listData} setListData={setListData} setCurrentView={setCurrentView} />
+                        )}
+                        <StatusBar barStyle="light-content" />
+                    </View>
+                </ImageBackground>
+            </SafeAreaProvider>
         </>
     );
 }
