@@ -2,6 +2,8 @@ import { StatusBar, ImageBackground, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider, createTheme } from '@rneui/themed';
+import { Slider, Text, Icon, Input } from '@rneui/themed';
 
 import Home from './components/Home';
 import TaskList from './components/TaskList';
@@ -15,6 +17,22 @@ export default function App() {
 
     const [curentView, setCurrentView] = useState('home');
     const [listData, setListData] = useState([]);
+
+    const theme = createTheme({
+        lightColors: {
+            primary: '#e7e7e8',
+        },
+        darkColors: {
+            primary: '#000',
+        },
+        mode: 'dark',
+        components: {
+            Input: {
+                containerStyle: {},
+            },
+            Button: {},
+        },
+    });
 
     // ------------------------------------------------------------------------------------------
 
@@ -57,11 +75,11 @@ export default function App() {
     return (
         <>
             <SafeAreaProvider>
-                <ImageBackground
-                    source={require('./assets/pexels-tobias-bjørkli-1819650.jpg')}
-                    style={styles.backgroundImage}
-                >
-                    <View style={styles.container}>
+                <ThemeProvider theme={theme}>
+                    <ImageBackground
+                        source={require('./assets/pexels-tobias-bjørkli-1819650.jpg')}
+                        style={styles.backgroundImage}
+                    >
                         {curentView === 'home' && (
                             <Home listData={listData} setListData={setListData} setCurrentView={setCurrentView} />
                         )}
@@ -69,8 +87,8 @@ export default function App() {
                             <TaskList listData={listData} setListData={setListData} setCurrentView={setCurrentView} />
                         )}
                         <StatusBar barStyle="light-content" />
-                    </View>
-                </ImageBackground>
+                    </ImageBackground>
+                </ThemeProvider>
             </SafeAreaProvider>
         </>
     );
