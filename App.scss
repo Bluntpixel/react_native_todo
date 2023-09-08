@@ -2,7 +2,8 @@
 
 $background-color: #333;
 $primary-color: #d3d3d3;
-$body-font-size: 18px;
+$body-font-size: 14px;
+$border-radius: 8px;
 
 %flex_box {
     display: flex;
@@ -15,14 +16,17 @@ $body-font-size: 18px;
     width: 100%;
     height: 100%;
 }
-
+.main {
+    @extend %flex_box;
+    width: 100%;
+    height: 100%;
+}
 .container {
     @extend %flex_box;
-    padding: 30px;
+    padding: 0px 20px 20px 20px;
     width: 100%;
     height: 100%;
     gap: 10px;
-    padding-top: 60px;
 }
 
 .textBody {
@@ -38,23 +42,48 @@ $body-font-size: 18px;
     box-shadow: 0 0 12px black;
 }
 
+.well {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: $border-radius;
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+}
+
 .input {
     font-size: $body-font-size;
     color: $background-color;
-    padding: 18px 20px;
+    padding: 10px 20px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 8px;
+    border-radius: $border-radius;
+    margin-top: 10px;
+}
+
+.slider {
     margin-top: 20px;
+}
+
+.slider_thumb {
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.slider_track {
+    width: 100%;
+    background-color: #0c908a;
 }
 
 %button_shared {
     @extend %flex_box;
-    padding: 14px;
+    padding: 14px 14px;
     background-color: #0c908a;
-    width: 60%;
-    border-radius: 6px;
-    margin-top: 20px;
+    width: 100%;
+    border-radius: 30px;
 }
 
 .button {
@@ -69,32 +98,50 @@ $body-font-size: 18px;
 .buttonText {
     font-size: $body-font-size;
     color: $primary-color;
+    font-weight: 700;
 }
 
 .list {
+    padding-top: 20px;
     width: 100%;
 }
 
 .list_item {
     @extend %flex_box;
     flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
     font-size: $body-font-size;
-    padding: 14px;
-    background-color: rgba(255, 255, 255, 0.5);
+    padding: 22px 22px;
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
-    margin-bottom: 1px;
+    margin-bottom: 4px;
+    border-radius: $border-radius;
+}
+
+.list_text_block {
+    flex-grow: 1;
+    gap: 5px;
 }
 
 .list_item_text {
-    font-size: $body-font-size;
-    color: $background-color;
+    font-size: 12px;
+    color: $primary-color;
+    flex-grow: 1;
+    max-width: 90%;
+    padding-right: 10px;
+}
+
+.list_item_text_title {
+    font-size: 20px;
+    color: $primary-color;
     flex-grow: 1;
     max-width: 90%;
     padding-right: 10px;
 }
 
 .list_item_icon {
-    width: 16px;
-    height: 20px;
-    opacity: 0.3;
+    width: 12px;
+    height: 16px;
+    opacity: 0.5;
 }

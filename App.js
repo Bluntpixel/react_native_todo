@@ -1,4 +1,4 @@
-import { StatusBar, ImageBackground, View } from 'react-native';
+import { StatusBar, ImageBackground, View, SafeAreaView } from 'react-native';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -25,6 +25,7 @@ export default function App() {
                 const value = await AsyncStorage.getItem('@storage_Key');
                 if (value !== null) {
                     setListData(JSON.parse(value));
+                    console.log(value);
                 }
             } catch (e) {
                 console.log('error reading localstore: ', e);
@@ -59,7 +60,7 @@ export default function App() {
                 source={require('./assets/pexels-tobias-bjørkli-1819650.jpg')}
                 style={styles.backgroundImage}
             >
-                <View style={styles.container}>
+                <SafeAreaView style={styles.main}>
                     {curentView === 'home' && (
                         <Home listData={listData} setListData={setListData} setCurrentView={setCurrentView} />
                     )}
@@ -67,7 +68,7 @@ export default function App() {
                         <TaskList listData={listData} setListData={setListData} setCurrentView={setCurrentView} />
                     )}
                     <StatusBar barStyle="light-content" />
-                </View>
+                </SafeAreaView>
             </ImageBackground>
         </>
     );
