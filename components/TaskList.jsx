@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TouchableHighlight, Text, FlatList, View, Image } from 'react-native';
+import AnimatedView from './AnimatedView';
+
+import { AppContext } from './ContextWrapper';
 
 import styles from '../App.scss';
 
-function TaskList({ listData, setListData, setCurrentView }) {
+function TaskList({}) {
+    const context = useContext(AppContext);
+
     // ------------------------------------------------------------------------------------------
 
     // HANDLE DELETE
 
     const handleDelete = (index) => {
-        let data = [...listData];
+        let data = [...context.listData];
         data.splice(index, 1);
-        setListData([...data]);
+        context.setListData([...data]);
     };
 
     // ------------------------------------------------------------------------------------------
@@ -19,11 +24,11 @@ function TaskList({ listData, setListData, setCurrentView }) {
     // RENDER
 
     return (
-        <>
+        <AnimatedView>
             <View style={styles.container}>
                 <FlatList
                     style={styles.list}
-                    data={listData}
+                    data={context?.listData}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <View style={styles.list_item}>
@@ -49,16 +54,16 @@ function TaskList({ listData, setListData, setCurrentView }) {
                         </View>
                     )}
                 />
-                <TouchableHighlight
+                {/*  <TouchableHighlight
                     style={styles.button2}
-                    onPress={() => setCurrentView('home')}
+                    onPress={() => navigation.navigate('Home')}
                     underlayColor="rgb(32, 200, 200)"
                     title="Press Me"
                 >
                     <Text style={styles.buttonText}>Home</Text>
-                </TouchableHighlight>
+                </TouchableHighlight> */}
             </View>
-        </>
+        </AnimatedView>
     );
 }
 

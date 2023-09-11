@@ -1,15 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { TouchableHighlight, Text, TextInput, Keyboard, View } from 'react-native';
 import { useState } from 'react';
 import { Slider } from '@miblanchard/react-native-slider';
+import AnimatedView from './AnimatedView';
+
+import { AppContext } from './ContextWrapper';
 
 import styles from '../App.scss';
 
-function Home({ listData, setListData, setCurrentView }) {
+function Home({ navigation }) {
     // ------------------------------------------------------------------------------------------
 
     // SETUP VARS
 
+    const context = useContext(AppContext);
     const [textInput, setTextInput] = useState('');
     const [sliderValue1, setSliderValue1] = useState(5);
     const [sliderValue2, setSliderValue2] = useState(5);
@@ -23,7 +27,7 @@ function Home({ listData, setListData, setCurrentView }) {
     const handleButtonPress = () => {
         if (textInput === '') return;
 
-        let data = [...listData];
+        let data = [...context.listData];
 
         const newDataItem = {
             date: new Date(),
@@ -33,9 +37,7 @@ function Home({ listData, setListData, setCurrentView }) {
             sliderValue3,
         };
 
-        data.unshift(newDataItem);
-
-        setListData(data);
+        context.setListData(data.unshift(newDataItem));
         Keyboard.dismiss();
         setTextInput('');
     };
@@ -45,7 +47,7 @@ function Home({ listData, setListData, setCurrentView }) {
     // RENDER
 
     return (
-        <>
+        <AnimatedView>
             <View style={styles.container}>
                 <Text style={styles.textLarge}>Add an event</Text>
                 <View style={styles.well}>
@@ -119,7 +121,7 @@ function Home({ listData, setListData, setCurrentView }) {
 
                 <TouchableHighlight
                     style={styles.button2}
-                    onPress={() => setCurrentView('list')}
+                    onPress={() => navigation.navigate('Event List')}
                     underlayColor="rgb(32, 200, 200)"
                     title="Press Me"
                     elevation={1}
@@ -127,7 +129,7 @@ function Home({ listData, setListData, setCurrentView }) {
                     <Text style={styles.buttonText}>View List</Text>
                 </TouchableHighlight>
             </View>
-        </>
+        </AnimatedView>
     );
 }
 
