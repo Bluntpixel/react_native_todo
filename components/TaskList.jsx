@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { TouchableHighlight, Text, FlatList, View, Image } from 'react-native';
 import AnimatedView from './AnimatedView';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import { AppContext } from './ContextWrapper';
 
@@ -28,10 +29,17 @@ function TaskList({}) {
             <View style={styles.container}>
                 <FlatList
                     style={styles.list}
-                    data={context?.listData}
+                    data={context.listData}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <View style={styles.list_item}>
+                            <View style={styles.list_emoji}>
+                                <Text>
+                                    {item.mood && (
+                                        <FontAwesomeIcon style={styles.emoji_icon} icon={item.mood} size={34} />
+                                    )}
+                                </Text>
+                            </View>
                             <View style={styles.list_text_block}>
                                 <Text style={styles.list_item_text}>
                                     {item.date

@@ -5,22 +5,54 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons/faHouse';
-import { faTableList } from '@fortawesome/free-solid-svg-icons/faTableList';
-import { faChartLine } from '@fortawesome/free-solid-svg-icons/faChartLine';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+    faHouse,
+    faTableList,
+    faChartLine,
+    faGear,
+    faHeartPulse,
+    faPills,
+    faBed,
+    faUser,
+    faFaceGrimace,
+    faFaceAngry,
+    faFaceGrinTongueWink,
+    faFaceMeh,
+    faFaceSmile,
+    faFaceGrinStars,
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+    faHouse,
+    faTableList,
+    faChartLine,
+    faGear,
+    faHeartPulse,
+    faPills,
+    faBed,
+    faUser,
+    faFaceGrimace,
+    faFaceAngry,
+    faFaceGrinTongueWink,
+    faFaceMeh,
+    faFaceSmile,
+    faFaceGrinStars,
+);
 
 import { ContextWrapper } from './components/ContextWrapper';
 
 import Home from './components/Home';
 import TaskList from './components/TaskList';
 import Stats from './components/Stats';
+import Settings from './components/Settings';
 
 import styles from './App.scss';
 
 export default function App() {
     // ------------------------------------------------------------------------------------------
 
-    // SETUP VARIABLES
+    // SETUP
 
     const navTheme = {
         ...DefaultTheme,
@@ -47,17 +79,17 @@ export default function App() {
                     <NavigationContainer theme={navTheme}>
                         <Tab.Navigator
                             screenOptions={({ route }) => ({
-                                headerShown: true,
+                                headerShown: false,
                                 tabBarIcon: ({ focused, color, size }) => {
                                     let iconName;
                                     if (route.name === 'Home') iconName = focused ? faHouse : faHouse;
                                     if (route.name === 'Event List') iconName = focused ? faTableList : faTableList;
                                     if (route.name === 'Stats') iconName = focused ? faChartLine : faChartLine;
-
+                                    if (route.name === 'Settings') iconName = focused ? faGear : faGear;
                                     return <FontAwesomeIcon icon={iconName} size={18} color={color} />;
                                 },
                                 tabBarActiveTintColor: '#4e2b68',
-                                tabBarInactiveTintColor: 'gray',
+                                tabBarInactiveTintColor: '#9b9b9b',
                                 headerTransparent: false,
                                 headerBlurEffect: 'dark',
                                 headerTitleAlign: 'center',
@@ -66,7 +98,7 @@ export default function App() {
                                 headerStyle: {
                                     backgroundColor: '#4e2b68',
                                 },
-                                headerTintColor: '#fff',
+                                headerTintColor: '#ffffff',
                                 headerTitleStyle: {
                                     fontWeight: 'normal',
                                 },
@@ -76,6 +108,7 @@ export default function App() {
                             <Tab.Screen name="Home" component={Home} />
                             <Tab.Screen name="Event List" component={TaskList} />
                             <Tab.Screen name="Stats" component={Stats} />
+                            <Tab.Screen name="Settings" component={Settings} />
                         </Tab.Navigator>
                     </NavigationContainer>
                 </ImageBackground>

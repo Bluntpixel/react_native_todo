@@ -1,10 +1,14 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useEffect } from 'react';
 import { TouchableHighlight, Text, TextInput, Keyboard, View } from 'react-native';
 import { useState } from 'react';
 import { Slider } from '@miblanchard/react-native-slider';
 import AnimatedView from './AnimatedView';
 
+import EmojiSelector from './EmojiSelector';
+
 import { AppContext } from './ContextWrapper';
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import styles from '../App.scss';
 
@@ -14,6 +18,7 @@ function Home({ navigation }) {
     // SETUP VARS
 
     const context = useContext(AppContext);
+    const [moodSelect, setMoodSelect] = useState('');
     const [textInput, setTextInput] = useState('');
     const [sliderValue1, setSliderValue1] = useState(5);
     const [sliderValue2, setSliderValue2] = useState(5);
@@ -31,16 +36,22 @@ function Home({ navigation }) {
 
         const newDataItem = {
             date: new Date(),
+            mood: moodSelect,
             content: textInput,
-            sliderValue1,
-            sliderValue2,
-            sliderValue3,
+            sliderValue1: sliderValue1,
+            sliderValue2: sliderValue2,
+            sliderValue3: sliderValue3,
         };
 
-        context.setListData(data.unshift(newDataItem));
+        data.unshift(newDataItem);
+        context.setListData(data);
         Keyboard.dismiss();
         setTextInput('');
     };
+
+    useEffect(() => {
+        console.log('moodSelect: ', moodSelect);
+    }, [moodSelect]);
 
     // ------------------------------------------------------------------------------------------
 
@@ -49,67 +60,96 @@ function Home({ navigation }) {
     return (
         <AnimatedView>
             <View style={styles.container}>
-                <Text style={styles.textLarge}>Add an event</Text>
+                <Text style={styles.textLarge}>How are things today?</Text>
+
                 <View style={styles.well}>
-                    <Text style={styles.textBody}>Add some text here.</Text>
+                    <EmojiSelector setMoodSelect={setMoodSelect} />
+                </View>
+
+                <View style={styles.well}>
+                    <Text style={styles.textBody}>General anxiety level: {sliderValue1} </Text>
+                    <View style={styles.slider_row}>
+                        <Text>
+                            <FontAwesomeIcon style={styles.slider_icon} icon={'fa-heart-pulse'} size={28} />
+                        </Text>
+                        <View style={styles.slider_outer}>
+                            <Slider
+                                style={styles.slider_outer}
+                                value={sliderValue1}
+                                thumbStyle={styles.slider_thumb}
+                                trackStyle={styles.slider_track}
+                                onValueChange={setSliderValue1}
+                                minimumValue={0}
+                                maximumValue={10}
+                                minimumTrackTintColor={'white'}
+                                step={1}
+                                trackClickable={true}
+                            />
+                        </View>
+                    </View>
+                </View>
+
+                <View style={styles.well}>
+                    <Text style={styles.textBody}>How are the meds working? {sliderValue2}</Text>
+                    <View style={styles.slider_row}>
+                        <Text>
+                            <FontAwesomeIcon style={styles.slider_icon} icon={'fa-pills'} size={28} />
+                        </Text>
+                        <View style={styles.slider_outer}>
+                            <Slider
+                                style={styles.slider}
+                                value={sliderValue2}
+                                thumbStyle={styles.slider_thumb}
+                                trackStyle={styles.slider_track}
+                                onValueChange={setSliderValue2}
+                                minimumValue={0}
+                                maximumValue={10}
+                                minimumTrackTintColor={'white'}
+                                step={1}
+                                trackClickable={true}
+                            />
+                        </View>
+                    </View>
+                </View>
+
+                <View style={styles.well}>
+                    <Text style={styles.textBody}>How was your sleep? {sliderValue3}</Text>
+                    <View style={styles.slider_row}>
+                        <Text>
+                            <FontAwesomeIcon style={styles.slider_icon} icon={'fa-bed'} size={28} />
+                        </Text>
+                        <View style={styles.slider_outer}>
+                            <Slider
+                                style={styles.slider}
+                                value={sliderValue3}
+                                thumbStyle={styles.slider_thumb}
+                                trackStyle={styles.slider_track}
+                                onValueChange={setSliderValue3}
+                                minimumValue={0}
+                                maximumValue={10}
+                                minimumTrackTintColor={'white'}
+                                step={1}
+                                trackClickable={true}
+                            />
+                        </View>
+                    </View>
+                </View>
+
+                <View style={styles.well}>
+                    <Text style={styles.textBody}>Give a general description:</Text>
                     <TextInput
                         style={styles.input}
                         onChangeText={setTextInput}
                         value={textInput}
-                        multiline
+                        multiline={false}
                         placeholder="Add reminder"
                         keyboardType="default"
                         ref={textInputRef}
                     />
                 </View>
-                <View style={styles.well}>
-                    <Text style={styles.textBody}>Slider One: {sliderValue1} </Text>
-                    <Slider
-                        style={styles.slider}
-                        value={sliderValue1}
-                        thumbStyle={styles.slider_thumb}
-                        trackStyle={styles.slider_track}
-                        onValueChange={setSliderValue1}
-                        minimumValue={0}
-                        maximumValue={10}
-                        minimumTrackTintColor={'white'}
-                        step={1}
-                        trackClickable={true}
-                    />
-                </View>
-                <View style={styles.well}>
-                    <Text style={styles.textBody}>Slider Two: {sliderValue2}</Text>
-                    <Slider
-                        style={styles.slider}
-                        value={sliderValue2}
-                        thumbStyle={styles.slider_thumb}
-                        trackStyle={styles.slider_track}
-                        onValueChange={setSliderValue2}
-                        minimumValue={0}
-                        maximumValue={10}
-                        minimumTrackTintColor={'white'}
-                        step={1}
-                        trackClickable={true}
-                    />
-                </View>
-                <View style={styles.well}>
-                    <Text style={styles.textBody}>Slider Three: {sliderValue3}</Text>
-                    <Slider
-                        style={styles.slider}
-                        value={sliderValue3}
-                        thumbStyle={styles.slider_thumb}
-                        trackStyle={styles.slider_track}
-                        onValueChange={setSliderValue3}
-                        minimumValue={0}
-                        maximumValue={10}
-                        minimumTrackTintColor={'white'}
-                        step={1}
-                        trackClickable={true}
-                    />
-                </View>
 
                 <TouchableHighlight
-                    style={styles.button}
+                    style={[styles.button, styles.submit_btn]}
                     onPress={handleButtonPress}
                     underlayColor="rgb(180, 106, 23)"
                     title="Press Me"
@@ -119,7 +159,7 @@ function Home({ navigation }) {
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight
+                {/* <TouchableHighlight
                     style={styles.button2}
                     onPress={() => navigation.navigate('Event List')}
                     underlayColor="rgb(32, 200, 200)"
@@ -127,10 +167,12 @@ function Home({ navigation }) {
                     elevation={1}
                 >
                     <Text style={styles.buttonText}>View List</Text>
-                </TouchableHighlight>
+                </TouchableHighlight> */}
             </View>
         </AnimatedView>
     );
 }
 
 export default Home;
+
+// https://snack.expo.dev/@miblanchard/@miblanchard-react-native-slider

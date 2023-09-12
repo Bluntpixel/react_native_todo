@@ -10,6 +10,33 @@ export const ContextWrapper = (props) => {
 
     const [listData, setListData] = useState([]);
 
+    const emotionsArray = [
+        {
+            label: 'Angry',
+            icon: 'fa-face-angry',
+        },
+        {
+            label: 'Grim',
+            icon: 'fa-face-grimace',
+        },
+        {
+            label: 'Crazy',
+            icon: 'fa-face-grin-tongue-wink',
+        },
+        {
+            label: 'Meh',
+            icon: 'fa-face-meh',
+        },
+        {
+            label: 'Happy',
+            icon: 'fa-face-smile',
+        },
+        {
+            label: 'Extatic',
+            icon: 'fa-face-grin-stars',
+        },
+    ];
+
     // ------------------------------------------------------------------------------------------
 
     // GET LIST DATA FROM LOCAL STORAGE
@@ -20,13 +47,16 @@ export const ContextWrapper = (props) => {
                 const value = await AsyncStorage.getItem('@storage_Key');
                 if (value !== null) {
                     setListData(JSON.parse(value));
-                    console.log(value);
+                    //console.log('AsyncStorage: ', value);
                 }
             } catch (e) {
                 console.log('error reading localstore: ', e);
             }
         };
-
+        /* AsyncStorage.getAllKeys()
+            .then((keys) => AsyncStorage.multiRemove(keys))
+            .then(() => console.log('AsyncStorage cleared'));
+        AsyncStorage.clear(); */
         getData();
     }, []);
 
@@ -42,6 +72,8 @@ export const ContextWrapper = (props) => {
                 console.log('error: ', e);
             }
         };
+
+        // console.log('storeData: ', listData);
         storeData();
     }, [listData]);
 
@@ -54,6 +86,7 @@ export const ContextWrapper = (props) => {
             value={{
                 listData,
                 setListData,
+                emotionsArray,
             }}
         >
             {props.children}

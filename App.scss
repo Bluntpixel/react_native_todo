@@ -28,25 +28,25 @@ $border-radius: 8px;
     padding: 0px 20px 20px 20px;
     width: 100%;
     height: 100%;
-    gap: 10px;
+    gap: 6px;
 }
 
 .textBody {
     font-size: $body-font-size;
     color: $primary-color;
     text-align: center;
-    box-shadow: 0 0 12px black;
+    box-shadow: 0 0 12px rgb(155, 155, 155);
 }
 
 .textLarge {
-    font-size: 34px;
+    font-size: 28px;
     color: $primary-color;
     box-shadow: 0 0 12px black;
 }
 
 .well {
     width: 100%;
-    padding: 12px 20px;
+    padding: 8px 20px 12px 20px;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: $border-radius;
     text-align: left;
@@ -59,13 +59,30 @@ $border-radius: 8px;
     color: $background-color;
     padding: 10px 20px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: $border-radius;
     margin-top: 10px;
+    margin-bottom: 8px;
 }
 
-.slider {
-    margin-top: 20px;
+.slider_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0px;
+}
+
+.slider_outer {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.slider_icon {
+    font-size: 30px;
+    color: white;
+    opacity: 0.7;
 }
 
 .slider_thumb {
@@ -82,7 +99,7 @@ $border-radius: 8px;
 
 %button_shared {
     @extend %flex_box;
-    padding: 14px 14px;
+    padding: 12px 14px;
     background-color: #0c908a;
     width: 100%;
     border-radius: 30px;
@@ -92,15 +109,20 @@ $border-radius: 8px;
     @extend %button_shared;
 }
 
+.submit_btn {
+    margin-top: 20px;
+    width: 80%;
+}
+
 .button2 {
     @extend %button_shared;
     background-color: #4e2b68;
 }
 
 .buttonText {
-    font-size: $body-font-size;
+    font-size: 18px;
     color: $primary-color;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .list {
@@ -143,7 +165,31 @@ $border-radius: 8px;
 }
 
 .list_item_icon {
-    width: 12px;
-    height: 16px;
     opacity: 0.5;
+    width: 16px;
+    height: 20px;
+}
+
+.list_emoji {
+    margin-right: 20px;
+}
+
+.emoji_icon {
+    opacity: 0.8;
+    color: $primary-color;
+}
+
+.emoji_icon_selected {
+    opacity: 1;
+    color: $primary-color;
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
+.emoji_selector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0px 3px 0px;
 }
