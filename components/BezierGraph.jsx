@@ -1,0 +1,97 @@
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { Dimensions } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
+import { LineChart } from 'react-native-chart-kit';
+
+import styles from '../App.scss';
+
+function BezierGraph({ title, arrayKey, dataSet }) {
+    // ------------------------------------------------------------------------------------------
+
+    // VARS
+
+    const [graphValues, setGraphValues] = useState([0]);
+
+    // ------------------------------------------------------------------------------------------
+
+    // DATA
+
+    useEffect(() => {
+        const tempData = [];
+        for (let i = 0; i < 7; i++) {
+            tempData.push(parseInt(dataSet[i][arrayKey]));
+        }
+        tempData.reverse();
+        setGraphValues([...tempData]);
+    }, [dataSet]);
+
+    // ------------------------------------------------------------------------------------------
+
+    // RENDER
+
+    return (
+        <View style={styles.graph_container}>
+            <Text style={styles.textLarge}>{title}</Text>
+            <LineChart
+                data={{
+                    labels: ['-6', '-5', '-4', '-3', '-2', '-1', 'Today'],
+                    datasets: [
+                        {
+                            data: graphValues,
+                        },
+                        {
+                            data: [10],
+                            withDots: false,
+                        },
+                        {
+                            data: [-10],
+                            withDots: false,
+                        },
+                    ],
+                }}
+                width={Dimensions.get('window').width - 40}
+                height={220}
+                yAxisLabel=""
+                yAxisSuffix=""
+                yAxisInterval={1}
+                fromZero={true}
+                verticalLabelRotation={0}
+                bezier={true}
+                segments={4}
+                style={{
+                    borderRadius: 8,
+                }}
+                chartConfig={{
+                    backgroundColor: '',
+                    backgroundGradientFrom: '#000',
+                    backgroundGradientFromOpacity: 0.8,
+                    backgroundGradientTo: '#000',
+                    backgroundGradientToOpacity: 0.3,
+                    decimalPlaces: 0,
+                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    style: {},
+                    propsForBackgroundLines: {
+                        strokeWidth: '1',
+                        stroke: 'rgba(255, 255, 255, 0.1)',
+                        strokeDasharray: '',
+                        style: 'solid',
+                    },
+                    propsForDots: {
+                        r: '2',
+                        strokeWidth: '1',
+                        stroke: '#fff',
+                    },
+                    propsForLabels: {
+                        margingTop: 20,
+                        paddingRight: 20,
+                    },
+                }}
+            />
+        </View>
+    );
+}
+
+export default BezierGraph;

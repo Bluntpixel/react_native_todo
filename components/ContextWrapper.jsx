@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import coolstory from 'coolstory.js';
 
 export const AppContext = createContext(null);
 
@@ -35,6 +36,10 @@ export const ContextWrapper = (props) => {
             label: 'Extatic',
             icon: 'fa-face-grin-stars',
         },
+        {
+            label: 'Extatic',
+            icon: 'fa-face-grin-stars',
+        },
     ];
 
     // ------------------------------------------------------------------------------------------
@@ -48,6 +53,7 @@ export const ContextWrapper = (props) => {
                 if (value !== null) {
                     setListData(JSON.parse(value));
                     //console.log('AsyncStorage: ', value);
+                    //generateSeedData();
                 }
             } catch (e) {
                 console.log('error reading localstore: ', e);
@@ -76,6 +82,31 @@ export const ContextWrapper = (props) => {
         // console.log('storeData: ', listData);
         storeData();
     }, [listData]);
+
+    // ------------------------------------------------------------------------------------
+
+    // GENERATE SEED DATA
+
+    const generateSeedData = () => {
+        let seedData = [];
+        for (let i = 0; i < 20; i++) {
+            const emotion = emotionsArray[Math.floor(Math.random() * emotionsArray.length)].icon;
+
+            const newItem = {
+                date: new Date(Date.now() - i * 1000 * 60 * 60 * 24),
+                mood: emotion,
+                content: coolstory.title(),
+                sliderValue1: 10 - Math.round(Math.random() * 20),
+                sliderValue2: 10 - Math.round(Math.random() * 20),
+                sliderValue3: 10 - Math.round(Math.random() * 20),
+            };
+
+            seedData.push(newItem);
+        }
+
+        console.log(JSON.stringify(seedData, null, 2));
+        setListData(seedData);
+    };
 
     // ------------------------------------------------------------------------------------
 

@@ -1,72 +1,52 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
 import AnimatedView from './AnimatedView';
 import { Dimensions } from 'react-native';
-const screenWidth = Dimensions.get('window').width;
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart,
-} from 'react-native-chart-kit';
+
+import BezierGraph from './BezierGraph';
+
+import { AppContext } from './ContextWrapper';
 
 import styles from '../App.scss';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function Stats() {
+    // ------------------------------------------------------------------------------------------
+
+    // VARS
+
+    const context = useContext(AppContext);
+    const [graphValues, setGraphValues] = useState([0]);
+
+    // ------------------------------------------------------------------------------------------
+
+    // DATA
+
+    useEffect(() => {
+        const listData = [...context.listData];
+        const tempData = [];
+        for (let i = 0; i < 7; i++) {
+            // console.log(listData[i].sliderValue1);
+            tempData.push(parseInt(listData[i].sliderValue1));
+        }
+        tempData.reverse();
+        setGraphValues([...tempData]);
+    }, [context.listData]);
+
     // ------------------------------------------------------------------------------------------
 
     // RENDER
 
     return (
         <AnimatedView>
-            <View style={styles.container}>
-                <Text style={styles.textLarge}>Bezier Line Chart</Text>
-                <LineChart
-                    data={{
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                        datasets: [
-                            {
-                                data: [
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                    Math.random() * 100,
-                                ],
-                            },
-                        ],
-                    }}
-                    width={Dimensions.get('window').width - 40} // from react-native
-                    height={420}
-                    yAxisLabel="$"
-                    yAxisSuffix="k"
-                    yAxisInterval={1} // optional, defaults to 1
-                    chartConfig={{
-                        backgroundColor: '#e26a00',
-                        backgroundGradientFrom: '#fb8c00',
-                        backgroundGradientTo: '#ffa726',
-                        decimalPlaces: 2, // optional, defaults to 2dp
-                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                        style: {
-                            borderRadius: 16,
-                        },
-                        propsForDots: {
-                            r: '6',
-                            strokeWidth: '2',
-                            stroke: '#ffa726',
-                        },
-                    }}
-                    bezier
-                    style={{
-                        marginVertical: 8,
-                        borderRadius: 16,
-                    }}
-                />
-            </View>
+            <SafeAreaView>
+                <ScrollView contentContainerStyle={styles.scroll_view} automaticallyAdjustContentInsets={true}>
+                    <Text style={styles.textLarge}>The last 7 days</Text>
+                    <BezierGraph title={'Anxiety Levels'} arrayKey={'sliderValue1'} dataSet={context.listData} />
+                    <BezierGraph title={'Meds Effieciency'} arrayKey={'sliderValue2'} dataSet={context.listData} />
+                    <BezierGraph title={'Sleep rating'} arrayKey={'sliderValue3'} dataSet={context.listData} />
+                </ScrollView>
+            </SafeAreaView>
         </AnimatedView>
     );
 }

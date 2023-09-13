@@ -73,7 +73,7 @@ export default function App() {
             <ContextWrapper>
                 <ImageBackground
                     style={{ flex: 1 }}
-                    source={require('./assets/pexels-tobias-bjørkli-1819650.jpg')}
+                    source={require('./assets/backgrounds/1605113165384013-0.jpg')}
                     resizeMode="cover"
                 >
                     <NavigationContainer theme={navTheme}>
@@ -86,7 +86,7 @@ export default function App() {
                                     if (route.name === 'Event List') iconName = focused ? faTableList : faTableList;
                                     if (route.name === 'Stats') iconName = focused ? faChartLine : faChartLine;
                                     if (route.name === 'Settings') iconName = focused ? faGear : faGear;
-                                    return <FontAwesomeIcon icon={iconName} size={18} color={color} />;
+                                    return <FontAwesomeIcon icon={iconName} size={22} color={color} />;
                                 },
                                 tabBarActiveTintColor: '#4e2b68',
                                 tabBarInactiveTintColor: '#9b9b9b',
@@ -94,7 +94,7 @@ export default function App() {
                                 headerBlurEffect: 'dark',
                                 headerTitleAlign: 'center',
                                 animation: 'slide_from_right',
-                                statusBarTranslucent: true,
+                                statusBarTranslucent: false,
                                 headerStyle: {
                                     backgroundColor: '#4e2b68',
                                 },
@@ -111,6 +111,7 @@ export default function App() {
                             <Tab.Screen name="Settings" component={Settings} />
                         </Tab.Navigator>
                     </NavigationContainer>
+                    <StatusBar barStyle="light-content" />
                 </ImageBackground>
             </ContextWrapper>
         </>

@@ -12,7 +12,7 @@ function EmojiSelector({ setMoodSelect }) {
     // SETUP VARS
 
     const context = useContext(AppContext);
-    const [selectedIconIndex, setSelectedIconIndex] = useState(null);
+    const [selectedIconIndex, setSelectedIconIndex] = useState();
 
     // ------------------------------------------------------------------------------------------
 
@@ -31,17 +31,12 @@ function EmojiSelector({ setMoodSelect }) {
         <>
             <View style={styles.emoji_selector}>
                 {context.emotionsArray.map((item, index) => (
-                    <TouchableOpacity
-                        key={index}
-                        onPress={() => handlePress(index, item.icon)}
-                        underlayColor="rgba(180, 106, 23, 0)"
-                        title="Press Me"
-                    >
+                    <TouchableOpacity key={index} onPress={() => handlePress(index, item.icon)}>
                         <Text>
                             <FontAwesomeIcon
                                 style={index === selectedIconIndex ? styles.emoji_icon_selected : styles.emoji_icon}
                                 icon={item.icon}
-                                size={34}
+                                size={31}
                             />
                         </Text>
                     </TouchableOpacity>

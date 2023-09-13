@@ -3004,6 +3004,11 @@ convert-source-map@^1.7.0:
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.9.0.tgz#7faae62353fb4213366d0ca98358d22e8368b05f"
   integrity sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==
 
+coolstory.js@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/coolstory.js/-/coolstory.js-0.1.2.tgz#054ee7ed19ed44b1d94cd8e8acb8ccd1ef0b61a9"
+  integrity sha512-CazleCTF8ofHHS8C5HNlcgJ0AEbs/i+zzyq9HFQnqE0hm7iXqGI2Rh2RPwhgAO4g9CBEvAkj+xZRS0JbhBYe1g==
+
 core-js-compat@^3.31.0:
   version "3.32.1"
   resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.32.1.tgz#55f9a7d297c0761a8eb1d31b593e0f5b6ffae964"

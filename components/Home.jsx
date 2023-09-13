@@ -20,9 +20,9 @@ function Home({ navigation }) {
     const context = useContext(AppContext);
     const [moodSelect, setMoodSelect] = useState('');
     const [textInput, setTextInput] = useState('');
-    const [sliderValue1, setSliderValue1] = useState(5);
-    const [sliderValue2, setSliderValue2] = useState(5);
-    const [sliderValue3, setSliderValue3] = useState(5);
+    const [sliderValue1, setSliderValue1] = useState(0);
+    const [sliderValue2, setSliderValue2] = useState(0);
+    const [sliderValue3, setSliderValue3] = useState(0);
     const textInputRef = useRef();
 
     // ------------------------------------------------------------------------------------------
@@ -30,6 +30,7 @@ function Home({ navigation }) {
     // FORM INPUTS
 
     const handleButtonPress = () => {
+        if (moodSelect === '') return;
         if (textInput === '') return;
 
         let data = [...context.listData];
@@ -47,10 +48,11 @@ function Home({ navigation }) {
         context.setListData(data);
         Keyboard.dismiss();
         setTextInput('');
+        navigation.navigate('Event List');
     };
 
     useEffect(() => {
-        console.log('moodSelect: ', moodSelect);
+        //console.log('moodSelect: ', moodSelect);
     }, [moodSelect]);
 
     // ------------------------------------------------------------------------------------------
@@ -79,7 +81,7 @@ function Home({ navigation }) {
                                 thumbStyle={styles.slider_thumb}
                                 trackStyle={styles.slider_track}
                                 onValueChange={setSliderValue1}
-                                minimumValue={0}
+                                minimumValue={-10}
                                 maximumValue={10}
                                 minimumTrackTintColor={'white'}
                                 step={1}
@@ -102,7 +104,7 @@ function Home({ navigation }) {
                                 thumbStyle={styles.slider_thumb}
                                 trackStyle={styles.slider_track}
                                 onValueChange={setSliderValue2}
-                                minimumValue={0}
+                                minimumValue={-10}
                                 maximumValue={10}
                                 minimumTrackTintColor={'white'}
                                 step={1}
@@ -125,7 +127,7 @@ function Home({ navigation }) {
                                 thumbStyle={styles.slider_thumb}
                                 trackStyle={styles.slider_track}
                                 onValueChange={setSliderValue3}
-                                minimumValue={0}
+                                minimumValue={-10}
                                 maximumValue={10}
                                 minimumTrackTintColor={'white'}
                                 step={1}
