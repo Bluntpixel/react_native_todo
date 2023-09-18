@@ -73,7 +73,7 @@ export default function App() {
             <ContextWrapper>
                 <ImageBackground
                     style={{ flex: 1 }}
-                    source={require('./assets/backgrounds/1605113165384013-0.jpg')}
+                    source={require('./assets/backgrounds/images.jpeg')}
                     resizeMode="cover"
                 >
                     <NavigationContainer theme={navTheme}>

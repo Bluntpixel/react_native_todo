@@ -39,6 +39,11 @@
         "sass"
       ]
     },
-    "owner": "bluntpixel"
+    "owner": "bluntpixel",
+    "extra": {
+      "eas": {
+        "projectId": "ce3b30a9-9ed8-47ac-b1a0-557d590dc1e5"
+      }
+    }
   }
 }
