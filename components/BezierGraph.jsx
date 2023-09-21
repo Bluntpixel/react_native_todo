@@ -13,6 +13,8 @@ function BezierGraph({ title, arrayKey, dataSet }) {
     // VARS
 
     const [graphValues, setGraphValues] = useState([0]);
+    const [graphLabels, setGraphLabels] = useState([]);
+    const [totalResults, setTotalResults] = useState(14);
 
     // ------------------------------------------------------------------------------------------
 
@@ -20,11 +22,20 @@ function BezierGraph({ title, arrayKey, dataSet }) {
 
     useEffect(() => {
         const tempData = [];
-        for (let i = 0; i < 7; i++) {
+        const tempLabels = [];
+        let resultsToDisplay = totalResults;
+
+        const dataSetLength = dataSet.length;
+        console.log('dataSet: ', dataSet);
+        if (dataSetLength < totalResults) resultsToDisplay = dataSetLength;
+
+        for (let i = 0; i < resultsToDisplay; i++) {
             tempData.push(parseInt(dataSet[i][arrayKey]));
+            tempLabels.push('' + (resultsToDisplay - i));
         }
         tempData.reverse();
         setGraphValues([...tempData]);
+        setGraphLabels([...tempLabels]);
     }, [dataSet]);
 
     // ------------------------------------------------------------------------------------------
@@ -36,7 +47,7 @@ function BezierGraph({ title, arrayKey, dataSet }) {
             <Text style={styles.textLarge}>{title}</Text>
             <LineChart
                 data={{
-                    labels: ['-6', '-5', '-4', '-3', '-2', '-1', 'Today'],
+                    labels: graphLabels,
                     datasets: [
                         {
                             data: graphValues,

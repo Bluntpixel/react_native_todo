@@ -52,14 +52,14 @@ export const ContextWrapper = (props) => {
                 const value = await AsyncStorage.getItem('@storage_Key');
                 if (value !== null) {
                     setListData(JSON.parse(value));
-                    console.log('AsyncStorage: ', value);
+                    //console.log('AsyncStorage: ', value);
                     //generateSeedData();
                 }
             } catch (e) {
                 console.log('error reading localstore: ', e);
             }
         };
-        /* AsyncStorage.getAllKeys()
+        /*  AsyncStorage.getAllKeys()
             .then((keys) => AsyncStorage.multiRemove(keys))
             .then(() => console.log('AsyncStorage cleared'));
         AsyncStorage.clear(); */
@@ -78,7 +78,7 @@ export const ContextWrapper = (props) => {
                 console.log('error: ', e);
             }
         };
-        if (listData.length !== 0) console.log('storeData: ', listData[0].date);
+        //if (listData.length !== 0) console.log('storeData: ', listData[0].date);
         storeData();
     }, [listData]);
 
