@@ -24,15 +24,25 @@ function Stats() {
 
     return (
         <AnimatedView>
-            <SafeAreaView>
-                <ScrollView contentContainerStyle={styles.scroll_view}>
+            {/*  <SafeAreaView> */}
+            <ScrollView contentContainerStyle={styles.scroll_view}>
+                <View style={styles.container}>
                     <Text style={styles.textLarge}>The last 7 days</Text>
-                    <ContributionMap title={'Frequency'} arrayKey={'date'} dataSet={context.listData} />
-                    <BezierGraph title={'Anxiety Levels'} arrayKey={'sliderValue1'} dataSet={context.listData} />
-                    <BezierGraph title={'Meds Effieciency'} arrayKey={'sliderValue2'} dataSet={context.listData} />
-                    <BezierGraph title={'Sleep rating'} arrayKey={'sliderValue3'} dataSet={context.listData} />
-                </ScrollView>
-            </SafeAreaView>
+                    <View style={styles.well}>
+                        <ContributionMap title={'Frequency'} arrayKey={'date'} dataSet={context.listData} />
+                    </View>
+                    <View style={styles.well}>
+                        <BezierGraph title={'Anxiety Levels'} arrayKey={'sliderValue1'} dataSet={context.listData} />
+                    </View>
+                    <View style={styles.well}>
+                        <BezierGraph title={'Meds Effieciency'} arrayKey={'sliderValue2'} dataSet={context.listData} />
+                    </View>
+                    <View style={styles.well}>
+                        <BezierGraph title={'Sleep rating'} arrayKey={'sliderValue3'} dataSet={context.listData} />
+                    </View>
+                </View>
+            </ScrollView>
+            {/*  </SafeAreaView> */}
         </AnimatedView>
     );
 }

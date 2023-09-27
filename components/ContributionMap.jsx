@@ -56,15 +56,14 @@ function ContributionMap({ title }) {
                 values={graphValues}
                 endDate={new Date()}
                 numDays={88}
-                width={screenWidth - 50}
+                width={screenWidth < 500 ? screenWidth - 40 : 500}
                 height={220}
                 chartConfig={{
-                    paddingRight: 50,
                     backgroundColor: '',
                     backgroundGradientFrom: '#000',
-                    backgroundGradientFromOpacity: 0.8,
+                    backgroundGradientFromOpacity: 0,
                     backgroundGradientTo: '#000',
-                    backgroundGradientToOpacity: 0.3,
+                    backgroundGradientToOpacity: 0,
                     decimalPlaces: 2,
                     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity === 0 ? 0 : opacity * 3})`,
                     style: {

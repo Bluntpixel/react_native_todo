@@ -1,3 +1,4 @@
+import { useContext, useEffect } from 'react';
 import { StatusBar, View, SafeAreaView, ImageBackground } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -40,14 +41,13 @@ library.add(
     faFaceGrinStars,
 );
 
-import { ContextWrapper } from './components/ContextWrapper';
-
 import Home from './components/Home';
 import TaskList from './components/TaskList';
 import Stats from './components/Stats';
 import Settings from './components/Settings';
+import { ContextWrapper } from './components/ContextWrapper';
 
-import styles from './App.scss';
+import BackgroundImage from './components/BackgroundImage';
 
 export default function App() {
     // ------------------------------------------------------------------------------------------
@@ -71,11 +71,7 @@ export default function App() {
     return (
         <>
             <ContextWrapper>
-                <ImageBackground
-                    style={{ flex: 1 }}
-                    source={require('./assets/backgrounds/images.jpeg')}
-                    resizeMode="cover"
-                >
+                <BackgroundImage>
                     <NavigationContainer theme={navTheme}>
                         <Tab.Navigator
                             screenOptions={({ route }) => ({
@@ -112,7 +108,7 @@ export default function App() {
                         </Tab.Navigator>
                     </NavigationContainer>
                     <StatusBar barStyle="light-content" />
-                </ImageBackground>
+                </BackgroundImage>
             </ContextWrapper>
         </>
     );

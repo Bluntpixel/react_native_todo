@@ -36,7 +36,7 @@ function EmojiSelector({ setMoodSelect }) {
                             <FontAwesomeIcon
                                 style={index === selectedIconIndex ? styles.emoji_icon_selected : styles.emoji_icon}
                                 icon={item.icon}
-                                size={31}
+                                size={32}
                             />
                         </Text>
                     </TouchableOpacity>

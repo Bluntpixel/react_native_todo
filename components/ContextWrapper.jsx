@@ -10,6 +10,8 @@ export const ContextWrapper = (props) => {
     // STATE, REFS ETC
 
     const [listData, setListData] = useState([]);
+    const [backgroundImage, setBackgroundImage] = useState('');
+    const [preferences, setPreferences] = useState({});
 
     const emotionsArray = [
         {
@@ -47,24 +49,37 @@ export const ContextWrapper = (props) => {
     // GET LIST DATA FROM LOCAL STORAGE
 
     useEffect(() => {
-        const getData = async () => {
+        const getListData = async () => {
             try {
-                const value = await AsyncStorage.getItem('@storage_Key');
+                const value = await AsyncStorage.getItem('listData');
                 if (value !== null) {
                     setListData(JSON.parse(value));
-                    //console.log('AsyncStorage: ', value);
+                    console.log('listData: ', value);
+                    getPreferences();
                     //generateSeedData();
                 }
             } catch (e) {
-                console.log('error reading localstore: ', e);
+                console.log('error reading listData: ', e);
             }
         };
-        /*  AsyncStorage.getAllKeys()
+
+        getListData();
+    }, []);
+
+    const getPreferences = async () => {
+        try {
+            const value = await AsyncStorage.getItem('preferences');
+            console.log('preferences: ', JSON.parse(value));
+            setPreferences(JSON.parse(value));
+        } catch (e) {
+            console.log('error reading preferences: ', e);
+        }
+    };
+
+    /*  AsyncStorage.getAllKeys()
             .then((keys) => AsyncStorage.multiRemove(keys))
             .then(() => console.log('AsyncStorage cleared'));
         AsyncStorage.clear(); */
-        getData();
-    }, []);
 
     // ------------------------------------------------------------------------------------------
 
@@ -72,15 +87,29 @@ export const ContextWrapper = (props) => {
 
     useEffect(() => {
         const storeData = async () => {
+            console.log('LocalStore listData: ', listData);
             try {
-                await AsyncStorage.setItem('@storage_Key', JSON.stringify(listData));
+                await AsyncStorage.setItem('listData', JSON.stringify(listData));
             } catch (e) {
                 console.log('error: ', e);
             }
         };
-        //if (listData.length !== 0) console.log('storeData: ', listData[0].date);
         storeData();
     }, [listData]);
+
+    // STORE PREFERENCES
+
+    useEffect(() => {
+        const storePreferences = async () => {
+            try {
+                await AsyncStorage.setItem('preferences', JSON.stringify(preferences));
+                console.log('Stored preferences: ', JSON.stringify(preferences));
+            } catch (e) {
+                console.log('error: ', e);
+            }
+        };
+        if (Object.keys(preferences).length !== 0) storePreferences();
+    }, [preferences]);
 
     // ------------------------------------------------------------------------------------
 
@@ -117,6 +146,11 @@ export const ContextWrapper = (props) => {
                 listData,
                 setListData,
                 emotionsArray,
+                backgroundImage,
+                setBackgroundImage,
+                preferences,
+                setPreferences,
+                getPreferences,
             }}
         >
             {props.children}

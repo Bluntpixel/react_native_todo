@@ -1,5 +1,13 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you choose a wallpaper."
+        }
+      ]
+    ],
     "name": "Tracker",
     "slug": "react-native-todo-exercise",
     "version": "1.0.0",
@@ -21,9 +29,6 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1d2934"
-      },
-      "androidNavigationBar": {
-        "visible": "sticky-immersive"
       },
       "package": "com.bluntpixel.reactnativetodoexcersise"
     },

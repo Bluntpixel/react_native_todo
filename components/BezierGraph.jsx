@@ -62,7 +62,7 @@ function BezierGraph({ title, arrayKey, dataSet }) {
                         },
                     ],
                 }}
-                width={Dimensions.get('window').width - 40}
+                width={screenWidth < 500 ? screenWidth - 40 : 500}
                 height={220}
                 yAxisLabel=""
                 yAxisSuffix=""
@@ -77,9 +77,9 @@ function BezierGraph({ title, arrayKey, dataSet }) {
                 chartConfig={{
                     backgroundColor: '',
                     backgroundGradientFrom: '#000',
-                    backgroundGradientFromOpacity: 0.8,
+                    backgroundGradientFromOpacity: 0,
                     backgroundGradientTo: '#000',
-                    backgroundGradientToOpacity: 0.3,
+                    backgroundGradientToOpacity: 0,
                     decimalPlaces: 0,
                     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
