@@ -49,6 +49,7 @@ export const ContextWrapper = (props) => {
     // GET LIST DATA FROM LOCAL STORAGE
 
     useEffect(() => {
+        console.log('getListData');
         const getListData = async () => {
             try {
                 const value = await AsyncStorage.getItem('listData');
@@ -76,16 +77,17 @@ export const ContextWrapper = (props) => {
         }
     };
 
-    /*  AsyncStorage.getAllKeys()
-            .then((keys) => AsyncStorage.multiRemove(keys))
-            .then(() => console.log('AsyncStorage cleared'));
-        AsyncStorage.clear(); */
+    /* AsyncStorage.getAllKeys()
+        .then((keys) => AsyncStorage.multiRemove(keys))
+        .then(() => console.log('AsyncStorage cleared'));
+    AsyncStorage.clear(); */
 
     // ------------------------------------------------------------------------------------------
 
     // STORE LIST DATA TO LOCAL STORAGE ON CHANGE
 
     useEffect(() => {
+        console.log('List data changed');
         const storeData = async () => {
             console.log('LocalStore listData: ', listData);
             try {
@@ -100,7 +102,7 @@ export const ContextWrapper = (props) => {
     // STORE PREFERENCES
 
     useEffect(() => {
-        const storePreferences = async () => {
+        /* const storePreferences = async () => {
             try {
                 await AsyncStorage.setItem('preferences', JSON.stringify(preferences));
                 console.log('Stored preferences: ', JSON.stringify(preferences));
@@ -108,7 +110,7 @@ export const ContextWrapper = (props) => {
                 console.log('error: ', e);
             }
         };
-        if (Object.keys(preferences).length !== 0) storePreferences();
+        if (Object.keys(preferences).length !== 0) storePreferences(); */
     }, [preferences]);
 
     // ------------------------------------------------------------------------------------

@@ -12,7 +12,7 @@ function BackgroundImage(props) {
     const context = useContext(AppContext);
 
     useEffect(() => {
-        console.log(context.preferences.backgroundImage);
+        // console.log(context.preferences.backgroundImage);
     }, []);
 
     // ------------------------------------------------------------------------------------------
@@ -22,11 +22,12 @@ function BackgroundImage(props) {
     return (
         <ImageBackground
             style={{ flex: 1 }}
-            source={
+            /* source={
                 context.preferences.backgroundImage
                     ? { uri: context.preferences.backgroundImage }
                     : require('../assets/backgrounds/images.jpeg')
-            }
+            } */
+            source={require('../assets/backgrounds/images.jpeg')}
             resizeMode="cover"
         >
             {props.children}
